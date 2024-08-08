@@ -4,15 +4,19 @@ const path = require('path');
 
 const loadEnvironmentVariables = () => {
     const env = process.env.NODE_ENV || 'development';
-    const envFile = env === 'production' ? '.env.production' : '.env.local';
-    const envPath = path.resolve(__dirname, envFile);
+    
+    // Load environment variables from .env file for development environment
+    if (env !== 'production') {
+        const envFile = env === 'development' ? '.env.local' : `.env.${env}`;
+        const envPath = path.resolve(__dirname, envFile);
 
-    if (fs.existsSync(envPath)) {
-        dotenv.config({ path: envPath });
-        console.log(`Loaded ${envFile} environment variables.`);
-    } else {
-        console.error(`Environment file ${envFile} not found. Please create it in the root directory.`);
-        process.exit(1);
+        if (fs.existsSync(envPath)) {
+            dotenv.config({ path: envPath });
+            console.log(`Loaded ${envFile} environment variables.`);
+        } else {
+            console.error(`Environment file ${envFile} not found. Please create it in the root directory.`);
+            process.exit(1);
+        }
     }
 
     // Load common environment variables

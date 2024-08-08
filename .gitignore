@@ -6,6 +6,9 @@ node_modules/
 .env.local
 .env.production
 
+# Ignore script
+set_heroku_envs_backend.ps1
+
 # Ignore log files
 *.log
 npm-debug.log*

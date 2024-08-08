@@ -10,7 +10,7 @@ async function seedDatabase() {
 
     const users = [
         {
-            email: 'jdellamalva@gmail.com',
+            email: 'testuser@email.com',
             password: 'Asdf1234!',
             createdAt: new Date(),
             cart: [],

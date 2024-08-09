@@ -6,8 +6,6 @@ const { setCookie, clearCookie } = require('../utils/cookie');
 const { auth } = require('../middleware');
 const User = require('../models/User');
 
-const FRONTEND_URL = process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL_PROD : process.env.FRONTEND_URL_DEV;
-
 /**
  * @swagger
  * tags:
@@ -44,11 +42,12 @@ router.get('/auth/google',
 router.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
+
     const token = jwt.sign({ userId: req.user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     setCookie(res, 'token', token);
 
-    res.redirect(`${FRONTEND_URL}/`);
+    res.redirect(`${process.env.FRONTEND_URL}/`);
   }
 );
 

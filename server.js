@@ -1,3 +1,6 @@
+const loadEnvironmentVariables = require('./envLoader');
+loadEnvironmentVariables();
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
@@ -7,14 +10,12 @@ const swaggerSpecs = require('./config/swagger');
 const cors = require('cors');
 const helmet = require('helmet');
 const connectToMongoDB = require('./config/mongo');
-const loadEnvironmentVariables = require('./envLoader');
+
 const { logger } = require('./middleware');
 const userRoutes = require('./routes/userRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const restaurantRoutes = require('./routes/restaurantRoutes');
 const authRoutes = require('./routes/authRoutes');
-
-loadEnvironmentVariables();
 
 const app = express();
 const port = process.env.PORT || 3001;

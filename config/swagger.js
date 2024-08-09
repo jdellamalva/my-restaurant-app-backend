@@ -6,13 +6,13 @@ const options = {
     info: {
       title: 'Restaurant API',
       version: '1.0.0',
-      description: 'API documentation for the Restaurant application',
+      description: `API documentation for the Restaurant application. \n\n [View JSON](${process.env.GOOGLE_CALLBACK_URL}/api/v1/swagger.json)`,
     },
     servers: [
-      {
-        url: 'http://localhost:3001',
-        description: 'Development server',
-      },
+        {
+            url: process.env.GOOGLE_CALLBACK_URL,
+            description: `${process.env.NODE_ENV} server`,
+        },
     ],
     components: {
       schemas: {
@@ -31,7 +31,6 @@ const options = {
               type: 'string',
               description: 'Address of the restaurant',
             },
-            // Add other restaurant properties as needed
           },
           required: ['name', 'address'],
           example: {
@@ -60,7 +59,6 @@ const options = {
               format: 'float',
               description: 'Price of the dish',
             },
-            // Add other dish properties as needed
           },
           required: ['name', 'price'],
           example: {

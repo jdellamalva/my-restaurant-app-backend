@@ -81,7 +81,17 @@ app.get('/', (req, res) => {
         `<strong>Giovanni's Pizza Collective</strong><br>by jdellamalva<br><br>API Documentation available <a href="/api/v1/docs">here</a>.`
     );
 });
+
+// Serve Swagger JSON directly at /api/v1/swagger.json
+app.use('/api/v1/swagger.json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerSpecs);
+});
+
+// Serve Swagger UI at /api/v1/docs
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+
+// API Routes
 app.use('/api/v1', userRoutes);
 app.use('/api/v1', paymentRoutes);
 app.use('/api/v1', restaurantRoutes);
